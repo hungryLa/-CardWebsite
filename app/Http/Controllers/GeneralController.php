@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\General\SendMailRequest;
 use App\Mail\AgreementEmail;
 use App\Mail\MainFormMail;
+use App\Models\General;
 use Illuminate\Support\Facades\Mail;
 
 class GeneralController extends Controller
@@ -14,7 +15,7 @@ class GeneralController extends Controller
         try {
             $data = $request->validated();
 
-            $success = Mail::to($request->email)
+            $success = Mail::to(General::RECIPIENT_EMAIL)
                 ->send(new MainFormMail($data));
 
             if($success){
