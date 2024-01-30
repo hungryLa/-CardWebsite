@@ -53,13 +53,13 @@ form.addEventListener('submit', async (e) => {
 
     formDialogText.textContent = ''
 
-    const isValidName = nameInput.value.length > 4;
+    const isValidName = nameInput.value.length > 2;
     const isValidEmail = /([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9_-]+)/.test(emailInput.value);
     const isValidPhone = phoneInput.value.length === 18;
 
 
     if (!isValidName) {
-        nameError.textContent = 'Email введен некорректно';
+        nameError.textContent = 'Имя введено некорректно';
         nameError.style.display = 'block';
     }
 
@@ -92,6 +92,9 @@ form.addEventListener('submit', async (e) => {
 
         if (response.status === 200) {
             formDialog.showModal()
+            phoneInput.value = "";
+            nameInput.value = "";
+            emailInput.value = "";
             document.body.classList.add('scroll-disabled');
             formDialogText.textContent = message
         }
